@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&H Planet | كوكب الصور الملكي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #000;
+            --panel: #111;
+            --diamond: #b9f2ff;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* الهيدر الملكي */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo { font-size: 24px; font-weight: bold; color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+
+        /* مشغل الموسيقى الفاخر */
+        .player-container {
+            background: linear-gradient(180deg, #1a1a1a 0%, #000 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .main-cover {
+            width: 280px;
+            height: 280px;
+            border-radius: 25px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            margin-bottom: 20px;
+            transition: 0.5s;
+        }
+
+        .track-title { color: var(--gold); font-size: 28px; margin: 10px 0; }
+        .track-sub { color: #888; margin-bottom: 25px; }
+
+        .controls { display: flex; justify-content: center; gap: 40px; align-items: center; }
+        .play-btn {
+            width: 80px; height: 80px; background: var(--gold); color: black;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; cursor: pointer; transition: 0.3s;
+        }
+        .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px var(--gold); }
+
+        /* منطقة أسياد الكوكب */
+        .admin-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: #050505;
+        }
+
+        .admin-badge {
+            padding: 10px 20px;
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            font-size: 14px;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* معرض الصور (الجاليري) */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 40px 5%;
+        }
+
+        .card {
+            background: var(--panel);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #222;
+            position: relative;
+            transition: 0.4s;
+        }
+
+        .card:hover { border-color: var(--gold); transform: translateY(-10px); }
+        .card img { width: 100%; height: 350px; object-fit: cover; }
+        
+        .star-rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--gold);
+            font-size: 22px;
+            filter: drop-shadow(0 0 8px gold);
+        }
+
+        /* شات سوسكا (الأدمن الذكي) */
+        #chat-trigger {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--gold), var(--diamond));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--gold);
+            z-index: 2000;
+        }
+
+        #chat-box {
+            position: fixed;
+            bottom: 110px;
+            left: 30px;
+            width: 320px;
+            height: 450px;
+            background: #000;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            display: none;
+            flex-direction: column;
+            z-index: 2000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">S&H PLANET OF PHOTOS</div>
+        <div style="color: var(--gold); font-size: 12px; border: 1px solid var(--gold); padding: 5px 10px; border-radius: 5px;">
+            إدارة: حلمي وسوسكا
+        </div>
+    </header>
+
+    <section class="player-container">
+        <img src="https://i.ibb.co/v4mS1vH/Planet-Of-Photos-Cover.jpg" class="main-cover" id="cover">
+        
+        <div class="track-info">
+            <h1 class="track-title">ملحمة الرمال</h1>
+            <p class="track-sub">بواسطة: أسياد الكوكب</p>
+        </div>
+
+        <div class="controls">
+            <i class="fas fa-backward" style="font-size: 25px; cursor: pointer;"></i>
+            <div class="play-btn" id="playBtn"><i class="fas fa-play"></i></div>
+            <i class="fas fa-forward" style="font-size: 25px; cursor: pointer;"></i>
+        </div>
+
+        <audio id="audioTrack" loop>
+            <source src="رابط_ملف_الموسيقى_هنا" type="audio/mpeg">
+        </audio>
+    </section>
+
+    <div class="admin-section">
+        <div class="admin-badge" style="color: var(--gold);"><i class="fas fa-crown"></i> حلمي: المؤسس</div>
+        <div class="admin-badge" style="color: var(--diamond); border-color: var(--diamond);"><i class="fas fa-gem"></i> سوسكا: الروح</div>
+    </div>
+
+    <main class="gallery" id="galleryGrid">
+        <div class="card">
+            <div class="star-rating"><i class="fas fa-star"></i></div>
+            <img src="https://i.ibb.co/M9YhK6Y/Ancient-Statue.jpg">
+            <div style="padding:15px; font-size: 14px;">التقييم الملكي: 10/10</div>
+        </div>
+        <div class="card">
+            <div class="star-rating"><i class="fas fa-star"></i></div>
+            <img src="https://i.ibb.co/G3XJ5Zk/Desert-View.jpg">
+            <div style="padding:15px; font-size: 14px;">التقييم الملكي: 10/10</div>
+        </div>
+    </main>
+
+    <div id="chat-trigger" onclick="toggleChat()">
+        <i class="fas fa-robot" style="font-size: 30px; color: black;"></i>
+    </div>
+
+    <div id="chat-box">
+        <div style="background:var(--gold); color:black; padding:15px; border-radius:18px 18px 0 0; font-weight:bold;">
+            سوسكا | المساعد الذكي لـ S&H
+        </div>
+        <div id="messages" style="flex:1; padding:15px; overflow-y:auto; font-size:14px;">
+            <div><strong>سوسكا:</strong> أهلاً بك في كوكب الصور. حلمي وسوسكا يرحبون بك. كيف يمكنني مساعدتك في رحلتك الإبداعية؟</div>
+        </div>
+        <div style="padding:10px; border-top:1px solid #222; display:flex;">
+            <input type="text" id="userInput" placeholder="تحدث مع سوسكا..." style="flex:1; background:transparent; border:none; color:white; outline:none;">
+            <i class="fas fa-paper-plane" style="color:var(--gold); cursor:pointer;" onclick="sendMsg()"></i>
+        </div>
+    </div>
+
+    <script>
+        // نظام تشغيل الموسيقى
+        const audio = document.getElementById('audioTrack');
+        const playBtn = document.getElementById('playBtn');
+        let isPlaying = false;
+
+        playBtn.onclick = () => {
+            if(!isPlaying) {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                document.getElementById('cover').style.transform = 'scale(1.05)';
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                document.getElementById('cover').style.transform = 'scale(1)';
+            }
+            isPlaying = !isPlaying;
+        };
+
+        // فتح وإغلاق الشات
+        function toggleChat() {
+            const chat = document.getElementById('chat-box');
+            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // إرسال الرسائل لسوسكا
+        function sendMsg() {
+            const input = document.getElementById('userInput');
+            const msgs = document.getElementById('messages');
+            if(!input.value) return;
+
+            msgs.innerHTML += `<div style="margin-top:10px; color:var(--gold);"><strong>أنت:</strong> ${input.value}</div>`;
+            const val = input.value;
+            input.value = "";
+
+            setTimeout(() => {
+                msgs.innerHTML += `<div style="margin-top:10px;"><strong>سوسكا:</strong> تم استلام طلبك. سأقوم بعرضه على المدير (حلمي) فوراً. نحن هنا لخدمة إبداعك.</div>`;
+                msgs.scrollTop = msgs.scrollHeight;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
